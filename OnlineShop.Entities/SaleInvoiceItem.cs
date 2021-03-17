@@ -1,7 +1,4 @@
 ﻿using OnlineShop.Infrastructure.Domian;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineShop.Entities
 {
@@ -12,7 +9,6 @@ namespace OnlineShop.Entities
         public int ProductCount { get; set; }
         public decimal Price { get; set; }
         public Product  Product { get; set; }
-
         public SaleInvoice SaleInvoice { get; set; }
     }
 }

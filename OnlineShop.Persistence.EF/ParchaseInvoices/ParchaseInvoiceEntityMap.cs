@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OnlineShop.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineShop.Persistence.EF.ParchaseInvoices
 {

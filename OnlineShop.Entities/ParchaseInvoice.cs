@@ -1,7 +1,5 @@
 ﻿using OnlineShop.Infrastructure.Domian;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineShop.Entities
 {
