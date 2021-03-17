@@ -44,5 +44,19 @@ namespace OnlineShop.Persistence.EF.Products
         {
             return await _dataContext.Products.AnyAsync(_ => _.Title == title && _.ProductCategoryId == productCategoryId);
         }
+
+        async Task<FindProductDto> ProductRepository.FindById(int id)
+        {
+            var product = _dataContext.Products.Select(_ => new FindProductDto
+            {
+                Id = _.Id,
+                Title = _.Title,
+                Code = _.Code,
+                MinimumStack = _.MinimumStack,
+                Category= _.ProductCategory.Title
+            }).Where(_ => _.Id == id).FirstOrDefaultAsync();
+
+            return await product;
+        }
     }
 }

@@ -21,6 +21,16 @@ namespace OnlineShop.Services.Products
             _unitOfWork = unitOfWork;
         }
 
+        //public Task<FindProductDto> FindProductById(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public async Task<FindProductDto> FindProductById(int id)
+        {
+            return await _repository.FindById(id);
+        }
+
         public async Task<IList<GetAllProductDto>> GetAll()
         {
             return await _repository.GetAllProducts();

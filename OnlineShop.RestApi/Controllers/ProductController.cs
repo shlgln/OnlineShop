@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Entities;
 using OnlineShop.Services.Products.Contracts;
 using System;
 using System.Collections.Generic;
@@ -19,15 +20,21 @@ namespace OnlineShop.RestApi.Controllers
         }
 
         [HttpPost]
-        public async Task<int> Register([FromBody]RegisterProductDto dto)
+        public async Task<int> Register([FromBody] RegisterProductDto dto)
         {
             return await _service.Register(dto);
         }
-        
+
         [HttpGet]
         public async Task<IList<GetAllProductDto>> GetAll()
         {
             return await _service.GetAll();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<FindProductDto> GetAll([FromRoute] int id)
+        {
+            return await _service.FindProductById(id);
         }
     }
 }

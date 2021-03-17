@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OnlineShop.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Services.Products.Contracts
@@ -7,5 +8,6 @@ namespace OnlineShop.Services.Products.Contracts
     {
         Task<int> Register(RegisterProductDto dto);
         Task<IList<GetAllProductDto>> GetAll();
+        Task<FindProductDto> FindProductById(int id);
     }
 }
