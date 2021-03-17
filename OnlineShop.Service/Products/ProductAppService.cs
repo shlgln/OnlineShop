@@ -21,6 +21,11 @@ namespace OnlineShop.Services.Products
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<IList<GetAllProductDto>> GetAll()
+        {
+            return await _repository.GetAllProducts();
+        }
+
         public async Task<int> Register(RegisterProductDto dto)
         {
             if (await _repository.IsDuplicateProductCode(dto.Code))

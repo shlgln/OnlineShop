@@ -22,6 +22,19 @@ namespace OnlineShop.Persistence.EF.Products
             _dataContext.Add(product);
         }
 
+        public async Task<IList<GetAllProductDto>> GetAllProducts()
+        {
+            var products = _dataContext.Products.Select(_ => new GetAllProductDto
+            {
+                Title = _.Title,
+                Code = _.Code,
+                MinimumStack = _.MinimumStack,
+                Category = _.ProductCategory.Title
+            }).ToListAsync();
+
+            return await products;
+        }
+
         public async Task<bool> IsDuplicateProductCode(string code)
         {
             return await _dataContext.Products.AnyAsync(_ => _.Code == code);

@@ -11,5 +11,6 @@ namespace OnlineShop.Services.Products.Contracts
         Task<bool> IsDuplicateProductCode(string code);
         void Add(Product product);
         Task<bool> IsDuplicateProductTitleInCategory(string title, int productCategoryId);
+        Task<IList<GetAllProductDto>> GetAllProducts();
     }
 }
