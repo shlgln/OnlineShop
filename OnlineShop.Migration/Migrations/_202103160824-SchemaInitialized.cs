@@ -1,8 +1,5 @@
 ﻿using FluentMigrator;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace OnlineShop.Migration.Migrations
 {

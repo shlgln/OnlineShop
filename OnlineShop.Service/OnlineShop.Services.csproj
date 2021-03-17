@@ -6,12 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.11" />
+    <Folder Include="ProductCategories\Exceptions\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OnlineShop.Entities\OnlineShop.Entities.csproj" />
-    <ProjectReference Include="..\OnlineShop.Service\OnlineShop.Services.csproj" />
+    <ProjectReference Include="..\OnlineShop.Infrastructure\OnlineShop.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
