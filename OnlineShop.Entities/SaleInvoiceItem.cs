@@ -12,5 +12,7 @@ namespace OnlineShop.Entities
         public int ProductCount { get; set; }
         public decimal Price { get; set; }
         public Product  Product { get; set; }
+
+        public SaleInvoice SaleInvoice { get; set; }
     }
 }

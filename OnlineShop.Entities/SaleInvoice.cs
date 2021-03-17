@@ -12,7 +12,7 @@ namespace OnlineShop.Entities
             AccuntingDocuments = new HashSet<AccuntingDocument>();
         }
         public int Id { get; set; }
-        public string InvoiceNumber { get; set; }
+        public string Number { get; set; }
         public int CustomerName { get; set; }
         public DateTime Date { get; set; }
         public HashSet<SaleInvoiceItem> saleInvoiceItems { get; set; }

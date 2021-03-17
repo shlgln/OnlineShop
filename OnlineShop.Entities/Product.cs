@@ -12,12 +12,14 @@ namespace OnlineShop.Entities
             InvoiceItems = new HashSet<SaleInvoiceItem>();
             StoreRooms = new HashSet<StoreRoom>();
         }
-        public int ProductId { get; set; }
+        public int Id { get; set; }
         public int  ProductCategoryId { get; set; }
-        public string ProductTitle { get; set; }
-        public string  ProductCode { get; set; }
-        public int productMinimumStack { get; set; }
+        public string Title { get; set; }
+        public string  Code { get; set; }
+        public int MinimumStack { get; set; }
+        public ProductCategory ProductCategory { get; set; }
         public HashSet<ParchaseInvoice> ParchaseInvoices { get; set; }
         public HashSet<StoreRoom> StoreRooms { get; set; }
+        public HashSet<SaleInvoiceItem> InvoiceItems { get; set; }
     }
 }
