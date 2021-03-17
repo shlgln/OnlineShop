@@ -10,7 +10,7 @@ namespace OnlineShop.Migration.Migrations
         {
             Create.Table("ProductCategories")
                  .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                 .WithColumn("Title").AsString(100).Unique().NotNullable();
+                 .WithColumn("Title").AsString(100).NotNullable();
 
             Create.Table("Products")
                .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()

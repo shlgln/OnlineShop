@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace OnlineShop.Persistence.EF
 {
@@ -27,9 +28,9 @@ namespace OnlineShop.Persistence.EF
             throw new NotImplementedException();
         }
 
-        public void Complete()
+        public async  Task Complete()
         {
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
         }
 
         public void Rollback()

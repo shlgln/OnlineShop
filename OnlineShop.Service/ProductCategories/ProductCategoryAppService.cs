@@ -1,6 +1,8 @@
 ﻿using OnlineShop.Entities;
 using OnlineShop.Infrastructure.Application;
 using OnlineShop.Services.ProductCategories.Contracts;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShop.Services.ProductCategories
 {
@@ -13,15 +15,21 @@ namespace OnlineShop.Services.ProductCategories
             _repository = repository;
             _unitOfWork = unitOfWork;
         }
-        public int Register(RegisterProductCategoryDto dto)
+
+        public async Task<IList<GetAllProductCategoryDto>> GetAll()
+        {
+            return await _repository.GetAllProductCategories();
+        }
+
+        public async Task<int> Register(RegisterProductCategoryDto dto)
         {
             var productCategory = new ProductCategory
             {
                 Title = dto.Title
             };
-            _repository.Add(productCategory);
-            _unitOfWork.Complete();
-            return productCategory.Id;
+             _repository.Add(productCategory);
+             await _unitOfWork.Complete();
+            return  productCategory.Id;
 
 
         }

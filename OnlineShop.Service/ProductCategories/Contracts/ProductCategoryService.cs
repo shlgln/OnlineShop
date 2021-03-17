@@ -1,7 +1,11 @@
-﻿namespace OnlineShop.Services.ProductCategories.Contracts
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace OnlineShop.Services.ProductCategories.Contracts
 {
     public interface ProductCategoryService
     {
-        int Register(RegisterProductCategoryDto dto);
+        Task<int> Register(RegisterProductCategoryDto dto);
+        Task<IList<GetAllProductCategoryDto>> GetAll();
     }
 }

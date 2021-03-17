@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Services.ProductCategories.Contracts;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShop.RestApi.Controllers
 {
@@ -14,9 +16,17 @@ namespace OnlineShop.RestApi.Controllers
         }
 
         [HttpPost]
-        public int Register(RegisterProductCategoryDto dto)
+        public async Task<int> Register([FromBody] RegisterProductCategoryDto dto)
         {
-            return _service.Register(dto);
+            return await _service.Register(dto);
         }
+
+        [HttpGet]
+        public async Task<IList<GetAllProductCategoryDto>> GetAll()
+        {
+            return await _service.GetAll();
+        }
+
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace OnlineShop.Infrastructure.Application
 {
@@ -10,6 +11,6 @@ namespace OnlineShop.Infrastructure.Application
         void CommitPartial();
         void Commit();
         void Rollback();
-        void Complete();
+        Task Complete();
     }
 }
