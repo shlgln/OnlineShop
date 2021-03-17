@@ -16,13 +16,13 @@ namespace OnlineShop.Persistence.EF.ParchaseInvoices
             _.HasKey(_ => _.Id);
             _.Property(_ => _.Id).IsRequired().ValueGeneratedOnAdd();
 
-            _.Property(_ => _.InvoiceNumber);
+            _.Property(_ => _.Number);
 
             _.Property(_ => _.ProductId);
 
             _.Property(_ => _.ProductCount).IsRequired();
 
-            _.Property(_ => _.Date);
+            _.Property(_ => _.DateRegistration);
 
             _.HasOne(_ => _.Product)
             .WithMany(_ => _.ParchaseInvoices)

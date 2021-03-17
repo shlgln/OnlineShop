@@ -1,12 +1,12 @@
-﻿using System;
+﻿using OnlineShop.Infrastructure.Domian;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OnlineShop.Entities
 {
-    public class StoreRoom
+    public class StoreRoom: Entity<int>
     {
-        public int Id { get; set; }
         public int ProductId { get; set; }
         public int Stock { get; set; }
         public Product Product { get; set; }

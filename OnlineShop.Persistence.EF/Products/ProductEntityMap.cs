@@ -26,7 +26,7 @@ namespace OnlineShop.Persistence.EF.Products
 
             _.Property(_ => _.MinimumStack).IsRequired();
 
-            _.HasMany(_ => _.InvoiceItems)
+            _.HasMany(_ => _.SaleInvoiceItems)
             .WithOne(_ => _.Product)
             .HasForeignKey(_ => _.ProductId)
             .OnDelete(DeleteBehavior.Restrict);

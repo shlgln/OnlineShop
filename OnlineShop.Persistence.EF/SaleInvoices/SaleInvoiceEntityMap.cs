@@ -11,7 +11,7 @@ namespace OnlineShop.Persistence.EF.SaleInvoices
     {
         public void Configure(EntityTypeBuilder<SaleInvoice> _)
         {
-            _.ToTable("SaleInvoice");
+            _.ToTable("SaleInvoices");
 
             _.HasKey(_ => _.Id);
 
@@ -24,7 +24,7 @@ namespace OnlineShop.Persistence.EF.SaleInvoices
             _.Property(_ => _.CustomerName)
             .IsRequired().HasMaxLength(100);
 
-            _.Property(_ => _.Date);
+            _.Property(_ => _.DateRegistration);
 
             _.HasMany(_ => _.saleInvoiceItems)
             .WithOne(_ => _.SaleInvoice)

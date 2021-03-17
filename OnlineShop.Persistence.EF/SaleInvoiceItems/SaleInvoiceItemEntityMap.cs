@@ -11,6 +11,8 @@ namespace OnlineShop.Persistence.EF.SaleInvoiceItems
     {
         public void Configure(EntityTypeBuilder<SaleInvoiceItem> _)
         {
+            _.ToTable("SaleInvoiceItems");
+
             _.HasKey(_ => _.Id);
 
             _.Property(_ => _.Id).IsRequired()

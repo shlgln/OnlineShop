@@ -23,7 +23,7 @@ namespace OnlineShop.Persistence.EF.AccountingDocuments
 
             _.Property(_ => _.SaleInvoiceId);
 
-            _.Property(_ => _.Date);
+            _.Property(_ => _.DateRegistration);
 
             _.Property(_ => _.TotalAmount);
 
