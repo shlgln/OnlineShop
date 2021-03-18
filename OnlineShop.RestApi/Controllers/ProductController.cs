@@ -32,7 +32,7 @@ namespace OnlineShop.RestApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<FindProductDto> GetAll([FromRoute] int id)
+        public async Task<FindProductDto?> GetAll([FromRoute] int id)
         {
             return await _service.FindProductById(id);
         }

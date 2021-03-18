@@ -11,18 +11,20 @@ namespace OnlineShop.Persistence.EF.ProductCategories
     public class EFProductCategoryRepository : ProductCategoryRepository
     {
         private readonly EFDataContext _dataContext;
+        private readonly DbSet<ProductCategory> _set;
         public EFProductCategoryRepository(EFDataContext dataContext)
         {
             _dataContext = dataContext;
+            _set = _dataContext.ProductCategories;
         }
         public void Add(ProductCategory productCategory)
         {
-            _dataContext.Add(productCategory);
+            _set.Add(productCategory);
         }
 
         public async Task<IList<GetAllProductCategoryDto>> GetAllProductCategories()
         {
-            var categories = _dataContext.ProductCategories.Select(_ => new GetAllProductCategoryDto
+            var categories = _set.Select(_ => new GetAllProductCategoryDto
             {
                 Id = _.Id,
                 Title = _.Title

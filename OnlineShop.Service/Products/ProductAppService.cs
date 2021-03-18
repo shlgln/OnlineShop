@@ -2,10 +2,7 @@
 using OnlineShop.Infrastructure.Application;
 using OnlineShop.Services.Products.Contracts;
 using OnlineShop.Services.Products.Exceptions;
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Services.Products
@@ -21,12 +18,8 @@ namespace OnlineShop.Services.Products
             _unitOfWork = unitOfWork;
         }
 
-        //public Task<FindProductDto> FindProductById(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
-        public async Task<FindProductDto> FindProductById(int id)
+        public async Task<FindProductDto?> FindProductById(int id)
         {
             return await _repository.FindById(id);
         }
@@ -38,11 +31,10 @@ namespace OnlineShop.Services.Products
 
         public async Task<int> Register(RegisterProductDto dto)
         {
-            if (await _repository.IsDuplicateProductCode(dto.Code))
-                throw new DuplicateProductCodeException();
 
-            if (await _repository.IsDuplicateProductTitleInCategory(dto.Title, dto.ProductCategoryId))
-                throw new DuplicateProductTitleInCategoryException();
+            await CheckDuplicateProductCode(dto.Code);
+
+            await CheckDuplicateProductTitleInCategory(dto.Title, dto.ProductCategoryId);
 
             var product = new Product
             {
@@ -52,8 +44,31 @@ namespace OnlineShop.Services.Products
                 MinimumStack = dto.MinimumStack
             };
             _repository.Add(product);
+
+            var storeRoom = new HashSet<StoreRoom>
+
+            { new StoreRoom
+                {
+                    ProductId = product.Id,
+                    Stock = 0
+                }
+                
+            };
+            product.StoreRooms = storeRoom;
+           
             await _unitOfWork.Complete();
             return product.Id;
+        }
+
+        private async Task CheckDuplicateProductCode(string code)
+        {
+            if (await _repository.IsDuplicateProductCode(code))
+                throw new DuplicateProductCodeException();
+        }
+        private async Task CheckDuplicateProductTitleInCategory(string title, int categoryId)
+        {
+            if (await _repository.IsDuplicateProductTitleInCategory(title, categoryId))
+                throw new DuplicateProductTitleInCategoryException();
         }
     }
 }

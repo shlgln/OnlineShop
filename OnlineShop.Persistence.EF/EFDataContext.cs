@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineShop.Persistence.EF
 {
