@@ -35,7 +35,6 @@ namespace OnlineShop.RestApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -58,21 +57,13 @@ namespace OnlineShop.RestApi
             services.AddScoped<SaleInvoiceRepository, EFSaleInvoiceRepository>();
             services.AddScoped<SaleInvoiceService, SaleInvoiceAppService>();
 
-            //services.AddScoped<SaleInvoiceItemRepository, EFSaleInvoiceItemRepository>();
-            //services.AddScoped<SaleInvoiceItemService, SaleInvoiceItemAppService>();
             services.AddSwaggerGen();
-
-            ////services.AddScoped<StoreRoomRepository, EFStoreRoomRepository>();
-            //services.AddScoped<StoreRoomService, StoreRoomAppService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwagger();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");

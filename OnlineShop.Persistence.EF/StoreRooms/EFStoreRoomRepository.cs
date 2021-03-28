@@ -19,7 +19,6 @@ namespace OnlineShop.Persistence.EF.StoreRooms
         public void Add(StoreRoom storeRoom)
         {
             _set.Add(storeRoom);
-
         }
 
         public async Task<StoreRoom> FindByProductId(int productId)
@@ -29,7 +28,6 @@ namespace OnlineShop.Persistence.EF.StoreRooms
 
         public async Task<IList<StoreRoomInventoryListDto>> GetAllStoreRoomInventory()
         {
-            
             var query = from p in _dataContext.Products
                         join s in _set on p.Id equals s.ProductId
                         select new StoreRoomInventoryListDto

@@ -18,6 +18,7 @@ namespace OnlineShop.RestApi.Controllers
         {
             _service = service;
         }
+
         [HttpPost]
         public async Task<int> Register(RegisterSaleInvoiceDto dto)
         {

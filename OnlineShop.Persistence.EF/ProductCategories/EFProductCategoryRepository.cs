@@ -24,27 +24,13 @@ namespace OnlineShop.Persistence.EF.ProductCategories
 
         public async Task<IList<GetAllProductCategoryDto>> GetAllProductCategories()
         {
-            //var categories = _set.Select(_ => new GetAllProductCategoryDto
-            //{
-            //    Id = _.Id,
-            //    Title = _.Title
+            var categories = _set.Select(_ => new GetAllProductCategoryDto
+            {
+                Id = _.Id,
+                Title = _.Title
 
-            //});
-
-            //return await categories.ToListAsync();
-            var query = from a in _set
-                        join p in _dataContext.Products on a.Id equals p.ProductCategoryId
-                        where p.Id == p.ProductCategoryId
-                        select new GetAllProductCategoryDto
-                        {
-                            Id = a.Id,
-                            Title = a.Title,
-                            products = a.Products.Select(m => m.Title).ToList(),
-                        };
-
-
-
-            return await query.ToListAsync();
+            });
+            return await categories.ToListAsync();
         }
 
         public Task<bool> IsDuplicatedCategoryTitle(string title)
