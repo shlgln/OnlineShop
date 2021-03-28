@@ -19,7 +19,7 @@ namespace OnlineShop.Services.Products
         }
 
 
-        public async Task<FindProductDto?> FindProductById(int id)
+        public async Task<FindProductDto> FindProductById(int id)
         {
             return await _repository.FindById(id);
         }

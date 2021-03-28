@@ -17,6 +17,6 @@ namespace OnlineShop.Persistence.EF
         public DbSet<SaleInvoice> SaleInvoices { get; set; }
         public DbSet<SaleInvoiceItem> SaleInvoiceItems { get; set; }
         public DbSet<StoreRoom> StoreRooms { get; set; }
-        public DbSet<AccuntingDocument> AccuntingDocuments { get; set; }
+        public DbSet<AccountingDocument> AccuntingDocuments { get; set; }
     }
 }

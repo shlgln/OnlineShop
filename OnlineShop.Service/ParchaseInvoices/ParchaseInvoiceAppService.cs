@@ -1,6 +1,7 @@
 ﻿using OnlineShop.Entities;
 using OnlineShop.Infrastructure.Application;
 using OnlineShop.Services.ParchaseInvoices.Contracs;
+using OnlineShop.Services.ParchaseInvoices.Exceptions;
 using OnlineShop.Services.Products.Contracts;
 using OnlineShop.Services.Products.Exceptions;
 using OnlineShop.Services.StoreRooms.Contracs;
@@ -26,6 +27,8 @@ namespace OnlineShop.Services.ParchaseInvoices
 
         public async Task<int> Register(RegisteParchaseInvoiceDto dto)
         {
+            await CheckIsExistInvoiceNumber(dto.Number);
+
             await CheckIsExistProduct(dto.ProductId);
 
             var productInStorRoom = await  _storeRoomRepository.FindByProductId(dto.ProductId);
@@ -41,7 +44,6 @@ namespace OnlineShop.Services.ParchaseInvoices
           
             _repository.Add(parchaseInvoice);
 
-
             productInStorRoom.Stock += parchaseInvoice.ProductCount;
 
             await _unitOfWork.Complete();
@@ -54,6 +56,14 @@ namespace OnlineShop.Services.ParchaseInvoices
             var product = await _productRepository.FindProductById(id);
             if (product == null)
                 throw new NotFoundProductById();
+        }
+
+        private async Task CheckIsExistInvoiceNumber(string number)
+        {
+            if (await _repository.IsDuplicatedInvoiceNumber(number))
+            {
+                throw new DuplicateInvoiceNumberException();
+            }
         }
     }
 }

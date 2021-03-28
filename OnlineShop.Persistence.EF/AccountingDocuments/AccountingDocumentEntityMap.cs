@@ -4,9 +4,9 @@ using OnlineShop.Entities;
 
 namespace OnlineShop.Persistence.EF.AccountingDocuments
 {
-    class AccountingDocumentEntityMap : IEntityTypeConfiguration<AccuntingDocument>
+    class AccountingDocumentEntityMap : IEntityTypeConfiguration<AccountingDocument>
     {
-        public void Configure(EntityTypeBuilder<AccuntingDocument> _)
+        public void Configure(EntityTypeBuilder<AccountingDocument> _)
         {
             _.ToTable("AccuntingDocuments");
             _.HasKey(_ => _.Id);
@@ -24,7 +24,7 @@ namespace OnlineShop.Persistence.EF.AccountingDocuments
 
             _.Property(_ => _.TotalAmount);
 
-            _.HasOne(_ => _.SaleInvoice).WithMany(_ => _.AccuntingDocuments)
+            _.HasOne(_ => _.SaleInvoice).WithMany(_ => _.AccountingDocuments)
                 .HasForeignKey(_ => _.SaleInvoiceId)
                 .OnDelete(DeleteBehavior.Restrict);
 

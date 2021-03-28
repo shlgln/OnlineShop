@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="StoreRooms\Exceptions\" />
+    <Folder Include="AccountingDocuments\Exceptions\" />
+    <Folder Include="SaleInvoices\Exceptions\" />
   </ItemGroup>
 
 </Project>

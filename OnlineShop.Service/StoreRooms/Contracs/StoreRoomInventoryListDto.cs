@@ -2,7 +2,6 @@
 {
     public class StoreRoomInventoryListDto
     {
-       
         public string ProductCode { get; set; }
         public string ProductTitle { get; set; }
         public string CategoryTitle { get; set; }

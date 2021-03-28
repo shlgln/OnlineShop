@@ -3,7 +3,7 @@ using System;
 
 namespace OnlineShop.Entities
 {
-    public class AccuntingDocument: Entity<int>
+    public class AccountingDocument: Entity<int>
     {
         public string Number { get; set; }
         public string SaleInvoiceNumber { get; set; }

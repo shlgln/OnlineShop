@@ -10,28 +10,28 @@ namespace OnlineShop.Persistence.EF.StoreRooms
     public class EFStoreRoomRepository : StoreRoomRepository
     {
         private readonly EFDataContext _dataContext;
-        //private readonly DbSet<StoreRoom> _set;
+        private readonly DbSet<StoreRoom> _set;
         public EFStoreRoomRepository(EFDataContext dataContext)
         {
             _dataContext = dataContext;
-           //_set = _dataContext.StoreRooms;
+           _set = _dataContext.StoreRooms;
         }
         public void Add(StoreRoom storeRoom)
         {
-            _dataContext.StoreRooms.Add(storeRoom);
+            _set.Add(storeRoom);
 
         }
 
-        public async Task< StoreRoom> FindByProductId(int productId)
+        public async Task<StoreRoom> FindByProductId(int productId)
         {
-            return await _dataContext.StoreRooms.SingleOrDefaultAsync(_ => _.ProductId == productId);
+            return await _set.SingleOrDefaultAsync(_ => _.ProductId == productId);
         }
 
-        public async Task<IList<StoreRoomInventoryListDto>> GetAllStoreRoomEnventory()
+        public async Task<IList<StoreRoomInventoryListDto>> GetAllStoreRoomInventory()
         {
             
             var query = from p in _dataContext.Products
-                        join s in _dataContext.StoreRooms on p.Id equals s.ProductId
+                        join s in _set on p.Id equals s.ProductId
                         select new StoreRoomInventoryListDto
                         {
                             ProductCode = p.Code,
@@ -40,8 +40,8 @@ namespace OnlineShop.Persistence.EF.StoreRooms
                             Stock = s.Stock,
                             MinimumStock = p.MinimumStack,                            
                         };
-            
-            return  await query.ToListAsync();
+
+            return await query.ToListAsync();
         }
     }
 }

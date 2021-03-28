@@ -1,6 +1,7 @@
 ﻿using OnlineShop.Entities;
 using OnlineShop.Infrastructure.Application;
 using OnlineShop.Services.ProductCategories.Contracts;
+using OnlineShop.Services.ProductCategories.Exceptions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -23,6 +24,9 @@ namespace OnlineShop.Services.ProductCategories
 
         public async Task<int> Register(RegisterProductCategoryDto dto)
         {
+            if (await _repository.IsDuplicatedCategoryTitle(dto.Title))
+                throw new DuplicatedCategoryTitleException();
+
             var productCategory = new ProductCategory
             {
                 Title = dto.Title

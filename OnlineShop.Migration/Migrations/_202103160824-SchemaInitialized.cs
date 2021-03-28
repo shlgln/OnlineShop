@@ -61,13 +61,13 @@ namespace OnlineShop.Migration.Migrations
 
         public override void Down()
         {
-            Delete.Table("ProductCategories");
-            Delete.Table("Products");
-            Delete.Table("ParchaseInvoices");
-            Delete.Table("StoreRooms");
-            Delete.Table("SaleInvoices");
-            Delete.Table("SaleInvoiceItems");
             Delete.Table("AccuntingDocuments");
+            Delete.Table("SaleInvoiceItems");
+            Delete.Table("SaleInvoices");
+            Delete.Table("StoreRooms");
+            Delete.Table("ParchaseInvoices");
+            Delete.Table("Products");
+            Delete.Table("ProductCategories");
         }
     }
 }

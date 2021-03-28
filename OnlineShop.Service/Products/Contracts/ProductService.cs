@@ -9,6 +9,6 @@ namespace OnlineShop.Services.Products.Contracts
     {
         Task<int> Register(RegisterProductDto dto);
         Task<IList<GetAllProductDto>> GetAll();
-        Task<FindProductDto?> FindProductById(int id);
+        Task<FindProductDto> FindProductById(int id);
     }
 }

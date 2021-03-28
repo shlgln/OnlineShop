@@ -9,6 +9,6 @@ namespace OnlineShop.Services.StoreRooms.Contracs
     {
         void Add(StoreRoom storeRoom);
         Task<StoreRoom> FindByProductId(int productId);
-        Task<IList<StoreRoomInventoryListDto>> GetAllStoreRoomEnventory();
+        Task<IList<StoreRoomInventoryListDto>> GetAllStoreRoomInventory();
     }
 }
