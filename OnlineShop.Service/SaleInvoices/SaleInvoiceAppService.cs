@@ -1,15 +1,15 @@
 ﻿using OnlineShop.Entities;
 using OnlineShop.Infrastructure.Application;
 using OnlineShop.Services.AccountingDocuments.Contracts;
+using OnlineShop.Services.AccountingDocuments.Exceptions;
+using OnlineShop.Services.ParchaseInvoices.Exceptions;
 using OnlineShop.Services.Products.Contracts;
 using OnlineShop.Services.Products.Exceptions;
-using OnlineShop.Services.SaleInvoiceItems.Contracts;
 using OnlineShop.Services.SaleInvoiceItems.Exceptions;
 using OnlineShop.Services.SaleInvoices.Contracts;
 using OnlineShop.Services.StoreRooms.Contracs;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Services.SaleInvoices
@@ -19,16 +19,19 @@ namespace OnlineShop.Services.SaleInvoices
         private readonly SaleInvoiceRepository _repository;
         private readonly ProductRepository _productRepository;
         private readonly StoreRoomRepository _storeRoomRepository;
+        private readonly AccountingDocumentRepository _accountingDocumentRepository;
         private readonly UnitOfWork _unitOfWork;
 
         public SaleInvoiceAppService(SaleInvoiceRepository repository,
             ProductRepository productRepository, 
             StoreRoomRepository storeRoomRepository,
+            AccountingDocumentRepository accountingDocumentRepository,
             UnitOfWork unitOfWork)
         {
             _repository = repository;
             _productRepository = productRepository;
             _storeRoomRepository = storeRoomRepository;
+            _accountingDocumentRepository = accountingDocumentRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -66,12 +69,14 @@ namespace OnlineShop.Services.SaleInvoices
             }
             saleInvoice.saleInvoiceItems.AddRange(saleInvoceItems);
 
+            await CheckIsDuplicatedAccountingNumber(dto.accountingDocumentDto.Number);
+
             var accountingDocument = new AccountingDocument
             {
                 DateRegistration = DateTime.Now,
                 TotalAmount = totalAmount,
                 SaleInvoiceId = saleInvoice.Id,
-                Number = dto.dto.Number,
+                Number = dto.accountingDocumentDto.Number,
                 SaleInvoiceNumber = saleInvoice.Number
             };
             saleInvoice.AccountingDocuments.Add(accountingDocument);
@@ -111,6 +116,11 @@ namespace OnlineShop.Services.SaleInvoices
             var productInStore = await _storeRoomRepository.FindByProductId(productId);
 
             productInStore.Stock -= count;
+        }
+        private async Task CheckIsDuplicatedAccountingNumber(string number)
+        {
+            if (await _accountingDocumentRepository.IsDuplicatedAccountingNumber(number))
+                throw new DuplicatedAccountingDocumnetNumberException();
         }
 
     }

@@ -18,7 +18,6 @@ namespace OnlineShop.Services.Products
             _unitOfWork = unitOfWork;
         }
 
-
         public async Task<FindProductDto> FindProductById(int id)
         {
             return await _repository.FindById(id);

@@ -5,12 +5,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShop.Infrastructure.Application;
 using OnlineShop.Persistence.EF;
+using OnlineShop.Persistence.EF.AccountingDocuments;
 using OnlineShop.Persistence.EF.ParchaseInvoices;
 using OnlineShop.Persistence.EF.ProductCategories;
 using OnlineShop.Persistence.EF.Products;
 using OnlineShop.Persistence.EF.SaleInvoiceItems;
 using OnlineShop.Persistence.EF.SaleInvoices;
 using OnlineShop.Persistence.EF.StoreRooms;
+using OnlineShop.Services.AccountingDocuments.Contracts;
 using OnlineShop.Services.ParchaseInvoices;
 using OnlineShop.Services.ParchaseInvoices.Contracs;
 using OnlineShop.Services.ProductCategories;
@@ -56,6 +58,8 @@ namespace OnlineShop.RestApi
 
             services.AddScoped<SaleInvoiceRepository, EFSaleInvoiceRepository>();
             services.AddScoped<SaleInvoiceService, SaleInvoiceAppService>();
+
+            services.AddScoped<AccountingDocumentRepository, EFAccountingDocumentRepository>();
 
             services.AddSwaggerGen();
         }

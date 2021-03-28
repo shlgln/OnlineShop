@@ -34,8 +34,6 @@ namespace OnlineShop.Services.ProductCategories
              _repository.Add(productCategory);
              await _unitOfWork.Complete();
             return  productCategory.Id;
-
-
         }
     }
 }
