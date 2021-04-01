@@ -123,5 +123,9 @@ namespace OnlineShop.Services.SaleInvoices
                 throw new DuplicatedAccountingDocumnetNumberException();
         }
 
+        public async Task<IList<GetSaleInvoiceDto>> GetAll()
+        {
+            return await _repository.GetAll();
+        }
     }
 }

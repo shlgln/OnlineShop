@@ -1,4 +1,6 @@
-﻿namespace OnlineShop.Services.StoreRooms.Contracs
+﻿using OnlineShop.Entities;
+
+namespace OnlineShop.Services.StoreRooms.Contracs
 {
     public class StoreRoomInventoryListDto
     {

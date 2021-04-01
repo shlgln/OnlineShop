@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Services.Queris.StoreRoomQueryis;
 using OnlineShop.Services.StoreRooms.Contracs;
-using OnlineShop.Services.StoreRooms.Contracs.Query;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineShop.RestApi.Controllers
@@ -27,10 +23,12 @@ namespace OnlineShop.RestApi.Controllers
             return await _service.GetAllStoreRoomInventoryList();
         }
 
-        [HttpGet("{sort}")]
-        public async Task<IList<StoreRoomInventoryListDto>> GetAllByQueryFilter([FromQuery]StoreRoomQueryFilter filter, string sort)
+        [HttpGet("{ordering}")]
+        public IList<StoreRoomInventoryListDto> GetAllByQueryFilter([FromQuery]StoreRoomQueryFilter filter,
+            string ordering)
         {
-            return  await _service.GetStoreRoomInventoryList(filter, sort);
+            var result = _service.GetStoreRoomsByQuery(filter, ordering);
+            return  result;
         }
     }
 }

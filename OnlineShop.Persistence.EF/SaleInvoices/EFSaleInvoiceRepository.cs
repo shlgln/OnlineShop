@@ -24,6 +24,21 @@ namespace OnlineShop.Persistence.EF.SaleInvoices
             _set.Add(saleInvoice);
         }
 
+        public async Task<IList<GetSaleInvoiceDto>> GetAll()
+        {
+            var query = from invoice in _set
+                        select new GetSaleInvoiceDto
+                        {
+                            Number = invoice.Number,
+                            CustomerName = invoice.CustomerName,
+                            saleInvoiceItems = invoice.saleInvoiceItems.Select(_ => _.Product.Title).ToList()
+                        };
+
+
+
+            return await query.ToListAsync();
+        }
+
         public async Task<bool> IsDuplicatedInvoiceNumber(string number)
         {
             return await _set.AnyAsync(_ => _.Number == number);

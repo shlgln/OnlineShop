@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OnlineShop.Services.StoreRooms.Contracs.Query
+namespace OnlineShop.Services.Queris.StoreRoomQueryis
 {
     public class StoreRoomQueryFilter
     {

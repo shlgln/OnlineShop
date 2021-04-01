@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Entities;
+using OnlineShop.Services.Queris.StoreRoomQueryis;
 using OnlineShop.Services.StoreRooms.Contracs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Persistence.EF.StoreRooms
@@ -14,7 +17,7 @@ namespace OnlineShop.Persistence.EF.StoreRooms
         public EFStoreRoomRepository(EFDataContext dataContext)
         {
             _dataContext = dataContext;
-           _set = _dataContext.StoreRooms;
+            _set = _dataContext.StoreRooms;
         }
         public void Add(StoreRoom storeRoom)
         {
@@ -28,18 +31,71 @@ namespace OnlineShop.Persistence.EF.StoreRooms
 
         public async Task<IList<StoreRoomInventoryListDto>> GetAllStoreRoomInventory()
         {
-            var query = from p in _dataContext.Products
-                        join s in _set on p.Id equals s.ProductId
-                        select new StoreRoomInventoryListDto
-                        {
-                            ProductCode = p.Code,
-                            ProductTitle = p.Title,
-                            CategoryTitle = p.ProductCategory.Title,
-                            Stock = s.Stock,
-                            MinimumStock = p.MinimumStack,                            
-                        };
+            return await _set.Select(_ => new StoreRoomInventoryListDto
+            {
+                ProductCode = _.Product.Code,
+                ProductTitle = _.Product.Title,
+                CategoryTitle = _.Product.ProductCategory.Title,
+                Stock = _.Stock,
+                MinimumStock = _.Product.MinimumStack,
+            }).ToListAsync();
+        }
 
-            return await query.ToListAsync();
+        public IQueryable<StoreRoomInventoryListDto> GetStoreRoomsByQuery()
+        {
+            var query = _set.Select(_ => new StoreRoomInventoryListDto
+            {
+                ProductCode = _.Product.Code,
+                ProductTitle = _.Product.Title,
+                CategoryTitle = _.Product.ProductCategory.Title,
+                Stock = _.Stock,
+                MinimumStock = _.Product.MinimumStack,
+            });
+            
+            return query;
+        }
+
+        public IList<StoreRoomInventoryListDto> SetStoreRoomFilter(IEnumerable<StoreRoomInventoryListDto> storeRoom,
+            StoreRoomQueryFilter filter)
+        {
+            if (filter.ProductCode != null)
+                storeRoom = storeRoom
+                .Where(_ => _.ProductCode == filter.ProductCode);
+
+            if (filter.ProductTitle != null)
+                storeRoom = storeRoom.Where(_ => _.ProductTitle.ToLower()
+                .Contains(filter.ProductTitle.ToLower()));
+
+            if (filter.CategoryTitle != null)
+                storeRoom = storeRoom.Where(_ => _.CategoryTitle.ToLower()
+                .Contains(filter.CategoryTitle.ToLower()));
+
+            if (filter.Stock != null)
+                storeRoom = storeRoom
+                .Where(_ => _.Stock == filter.Stock);
+
+            if (filter.MinimumStock != null)
+                storeRoom = storeRoom
+                .Where(_ => _.MinimumStock == filter.MinimumStock);
+
+            if (filter.Status != null)
+                storeRoom = storeRoom
+                .Where(_ => _.Status == filter.Status);
+
+            return storeRoom.ToList();
+        }
+        public IQueryable<StoreRoomInventoryListDto> SetStoreRoomSort(IQueryable<StoreRoomInventoryListDto> entities,
+            string ordering)
+        {
+            var type = typeof(StoreRoomInventoryListDto);
+            var property = type.GetProperty(ordering);
+            var parameter = Expression.Parameter(type, "p");
+            var propertyAccess = Expression.MakeMemberAccess(parameter, property);
+            var orderByExp = Expression.Lambda(propertyAccess, parameter);
+            MethodCallExpression resultExp = Expression.Call(typeof(Queryable), "OrderBy",
+                new Type[] { type, property.PropertyType },
+                entities.Expression, Expression.Quote(orderByExp));
+            return entities.Provider.CreateQuery<StoreRoomInventoryListDto>(resultExp);
         }
     }
 }

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace OnlineShop.Services.StoreRooms.Contracs
+namespace OnlineShop.Services.Queries
 {
     public class PagedList<T>: List<T>
     {
@@ -11,11 +12,7 @@ namespace OnlineShop.Services.StoreRooms.Contracs
         public int TotalPages { get; set; }
         public int PageSize { get; set; }
         public int TotalCount { get; set; }
-        public bool HasPreviousePage => CurentPage > 1;
-        public bool HasNextPage => CurentPage < TotalPages;
-        public int? PreviousPageNumber => HasPreviousePage ? CurentPage - 1 : (int?)null;
-        public int? NextPageNumber => HasNextPage ? CurentPage + 1 : (int?)null;
-
+        
         public PagedList(List<T> items, int count, int pageNumber, int pageSize)
         {
             TotalCount = count;
@@ -24,11 +21,11 @@ namespace OnlineShop.Services.StoreRooms.Contracs
             TotalPages = (int)Math.Ceiling(count / (double)pageNumber);
             AddRange(items);
         }
-        public static PagedList<T> Create(IEnumerable<T> source, int pageNumber, int pageSize)
+        public  static PagedList<T> Create(IList<T> source, int pageNumber, int pageSize)
         {
             var count = source.Count();
             var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
-            return new PagedList<T>(items, count, pageNumber, pageSize);
+            return  new PagedList<T>(items, count, pageNumber, pageSize);
         }
 
 

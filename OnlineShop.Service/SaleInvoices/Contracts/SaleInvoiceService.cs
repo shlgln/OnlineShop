@@ -9,5 +9,6 @@ namespace OnlineShop.Services.SaleInvoices.Contracts
     public interface SaleInvoiceService
     {
         Task<int> Register(RegisterSaleInvoiceDto dto);
+        Task<IList<GetSaleInvoiceDto>> GetAll();
     }
 }

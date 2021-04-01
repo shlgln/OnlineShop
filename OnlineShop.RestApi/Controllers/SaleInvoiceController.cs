@@ -25,5 +25,11 @@ namespace OnlineShop.RestApi.Controllers
             return await _service.Register(dto);
         }
 
+        [HttpGet]
+        public async Task<IList<GetSaleInvoiceDto>> Get()
+        {
+            return await _service.GetAll();
+        }
+
     }
 }

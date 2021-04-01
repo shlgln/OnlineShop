@@ -45,13 +45,12 @@ namespace OnlineShop.Services.Products
             _repository.Add(product);
 
             var storeRoom = new HashSet<StoreRoom>
-
-            { new StoreRoom
+            {
+                new StoreRoom
                 {
                     ProductId = product.Id,
                     Stock = 0
                 }
-                
             };
             product.StoreRooms = storeRoom;
            

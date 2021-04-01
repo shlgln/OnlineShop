@@ -11,5 +11,6 @@ namespace OnlineShop.Services.SaleInvoices.Contracts
     {
         void Add(SaleInvoice saleInvoice);
         Task<bool> IsDuplicatedInvoiceNumber(string number);
+        Task<IList<GetSaleInvoiceDto>> GetAll();
     }
 }
