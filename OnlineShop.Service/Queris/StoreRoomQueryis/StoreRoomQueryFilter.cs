@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnlineShop.Services.Queris.StoreRoomQueryis
+﻿namespace OnlineShop.Services.Queris.StoreRoomQueryis
 {
     public class StoreRoomQueryFilter
     {

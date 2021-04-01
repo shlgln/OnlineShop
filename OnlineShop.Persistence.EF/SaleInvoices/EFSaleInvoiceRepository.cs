@@ -31,11 +31,14 @@ namespace OnlineShop.Persistence.EF.SaleInvoices
                         {
                             Number = invoice.Number,
                             CustomerName = invoice.CustomerName,
-                            saleInvoiceItems = invoice.saleInvoiceItems.Select(_ => _.Product.Title).ToList()
+                            saleInvoiceItems = invoice.saleInvoiceItems.Select(_ => new GetSaleInvoiceItemDto
+                            {
+                                ProductId = _.ProductId,
+                                ProductTitle = _.Product.Title,
+                                ProductCount = _.ProductCount,
+                                Price = _.Price
+                            }).ToList()
                         };
-
-
-
             return await query.ToListAsync();
         }
 

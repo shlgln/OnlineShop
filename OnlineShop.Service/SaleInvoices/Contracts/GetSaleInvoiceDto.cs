@@ -11,7 +11,6 @@ namespace OnlineShop.Services.SaleInvoices.Contracts
         public string Number { get; set; }
         public string CustomerName { get; set; }
         public DateTime DateRegistration { get; set; }
-        public List<string> saleInvoiceItems { get; set; }
-        public List<AccountingDocument> AccuntingDocuments { get; set; }
+        public List<GetSaleInvoiceItemDto> saleInvoiceItems { get; set; }
     }
 }
