@@ -1,4 +1,4 @@
-﻿namespace OnlineShop.Services.Queris.StoreRoomQueryis
+﻿namespace OnlineShop.Services.StoreRooms.Queris
 {
     public class StoreRoomQueryFilter
     {

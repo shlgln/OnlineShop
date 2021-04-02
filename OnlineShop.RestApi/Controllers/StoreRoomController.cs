@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Services.Queris.StoreRoomQueryis;
 using OnlineShop.Services.StoreRooms.Contracs;
+using OnlineShop.Services.StoreRooms.Queris;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -23,11 +23,11 @@ namespace OnlineShop.RestApi.Controllers
             return await _service.GetAllStoreRoomInventoryList();
         }
 
-        [HttpGet("{ordering}")]
+        [HttpGet("{ordering}/{sortOrder}")]
         public IList<StoreRoomInventoryListDto> GetAllByQueryFilter([FromQuery]StoreRoomQueryFilter filter,
-            string ordering)
+            string ordering, bool sortOrder)
         {
-            var result = _service.GetStoreRoomsByQuery(filter, ordering);
+            var result = _service.GetStoreRoomsByQuery(filter, ordering, sortOrder);
             return  result;
         }
     }

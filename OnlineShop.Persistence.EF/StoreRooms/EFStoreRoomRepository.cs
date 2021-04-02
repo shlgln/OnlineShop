@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Entities;
-using OnlineShop.Services.Queris.StoreRoomQueryis;
 using OnlineShop.Services.StoreRooms.Contracs;
+using OnlineShop.Services.StoreRooms.Queris;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,12 +45,13 @@ namespace OnlineShop.Persistence.EF.StoreRooms
         {
             var query = _set.Select(_ => new StoreRoomInventoryListDto
             {
+                Id = _.Id,
                 ProductCode = _.Product.Code,
                 ProductTitle = _.Product.Title,
                 CategoryTitle = _.Product.ProductCategory.Title,
                 Stock = _.Stock,
                 MinimumStock = _.Product.MinimumStack,
-            });
+            });;
             
             return query;
         }
@@ -85,17 +86,74 @@ namespace OnlineShop.Persistence.EF.StoreRooms
             return storeRoom.ToList();
         }
         public IQueryable<StoreRoomInventoryListDto> SetStoreRoomSort(IQueryable<StoreRoomInventoryListDto> entities,
+            string ordering, bool sortingOrder)
+        {
+            if (sortingOrder)
+                return SetStoreRoomOrderByASC(entities, ordering);
+
+            return SetStoreRoomOrderByDESC(entities, ordering);
+        }
+
+        private IQueryable<StoreRoomInventoryListDto> SetStoreRoomOrderByASC(IQueryable<StoreRoomInventoryListDto> entities,
+           string ordering)
+        {
+            if (ordering == "")
+                entities = entities.OrderBy(_ => _.Id);
+
+            if (ordering == "productTitle")
+                entities = entities.OrderBy(_ => _.ProductTitle);
+
+            if (ordering == "stock")
+                entities = entities.OrderBy(_ => _.Stock);
+
+
+            if (ordering == "productCode")
+                entities = entities.OrderBy(_ => _.ProductCode);
+
+            if (ordering == "minimumStock")
+                entities = entities.OrderBy(_ => _.MinimumStock);
+
+            if (ordering == "minimumStock")
+                entities = entities.OrderBy(_ => _.MinimumStock);
+
+            if (ordering == "categoryTitle")
+                entities = entities.OrderBy(_ => _.CategoryTitle);
+
+            if (ordering == "Status")
+                entities = entities.OrderBy(_ => _.Status);
+
+            return entities;
+        }
+
+        private IQueryable<StoreRoomInventoryListDto> SetStoreRoomOrderByDESC(IQueryable<StoreRoomInventoryListDto> entities,
             string ordering)
         {
-            var type = typeof(StoreRoomInventoryListDto);
-            var property = type.GetProperty(ordering);
-            var parameter = Expression.Parameter(type, "p");
-            var propertyAccess = Expression.MakeMemberAccess(parameter, property);
-            var orderByExp = Expression.Lambda(propertyAccess, parameter);
-            MethodCallExpression resultExp = Expression.Call(typeof(Queryable), "OrderBy",
-                new Type[] { type, property.PropertyType },
-                entities.Expression, Expression.Quote(orderByExp));
-            return entities.Provider.CreateQuery<StoreRoomInventoryListDto>(resultExp);
+            if (ordering == "")
+                entities = entities.OrderByDescending(_ => _.Id);
+
+            if (ordering == "productTitle")
+                entities = entities.OrderByDescending(_ => _.ProductTitle);
+
+            if (ordering == "stock")
+                entities = entities.OrderByDescending(_ => _.Stock);
+
+
+            if (ordering == "productCode")
+                entities = entities.OrderByDescending(_ => _.ProductCode);
+
+            if (ordering == "minimumStock")
+                entities = entities.OrderByDescending(_ => _.MinimumStock);
+
+            if (ordering == "minimumStock")
+                entities = entities.OrderByDescending(_ => _.MinimumStock);
+
+            if (ordering == "categoryTitle")
+                entities = entities.OrderByDescending(_ => _.CategoryTitle);
+
+            if (ordering == "Status")
+                entities = entities.OrderByDescending(_ => _.Status);
+
+            return entities;
         }
     }
 }

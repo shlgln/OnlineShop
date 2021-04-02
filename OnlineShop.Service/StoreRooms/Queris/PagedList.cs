@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop.Services.Queries
+namespace OnlineShop.Services.StoreRooms.Queries
 {
     public class PagedList<T>: List<T>
     {

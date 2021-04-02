@@ -1,6 +1,6 @@
 ﻿using OnlineShop.Entities;
 using OnlineShop.Infrastructure.Application;
-using OnlineShop.Services.Queris.StoreRoomQueryis;
+using OnlineShop.Services.StoreRooms.Queris;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace OnlineShop.Services.StoreRooms.Contracs
             (IEnumerable<StoreRoomInventoryListDto> storeRoom,
             StoreRoomQueryFilter filter);
         IQueryable<StoreRoomInventoryListDto> SetStoreRoomSort(IQueryable<StoreRoomInventoryListDto> entities,
-            string ordering);
+            string ordering, bool sortingOrder);
         Task<IList<StoreRoomInventoryListDto>> GetAllStoreRoomInventory();
     }
 }

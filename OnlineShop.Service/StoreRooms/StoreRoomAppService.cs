@@ -1,6 +1,6 @@
-﻿using OnlineShop.Services.Queries;
-using OnlineShop.Services.Queris.StoreRoomQueryis;
-using OnlineShop.Services.StoreRooms.Contracs;
+﻿using OnlineShop.Services.StoreRooms.Contracs;
+using OnlineShop.Services.StoreRooms.Queries;
+using OnlineShop.Services.StoreRooms.Queris;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,10 +20,10 @@ namespace OnlineShop.Services.StoreRooms
             return  storRoomItems;
         }
 
-        public IList<StoreRoomInventoryListDto> GetStoreRoomsByQuery(StoreRoomQueryFilter filter, string ordering)
+        public IList<StoreRoomInventoryListDto> GetStoreRoomsByQuery(StoreRoomQueryFilter filter, string ordering, bool sortOrder)
         {
             var storRoomItems =  _repository.GetStoreRoomsByQuery();
-            storRoomItems = _repository.SetStoreRoomSort(storRoomItems, ordering);
+            storRoomItems = _repository.SetStoreRoomSort(storRoomItems, ordering, sortOrder);
             var list = _repository.SetStoreRoomFilter(storRoomItems, filter);
            
 
