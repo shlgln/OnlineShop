@@ -15,7 +15,7 @@ namespace OnlineShop.Persistence.EF.Products
             _.Property(_ => _.Id)
             .IsRequired().ValueGeneratedOnAdd();
 
-            _.Property(_ => _.ProductCategoryId);
+            _.Property(_ => _.ProductCategoryId).IsRequired();
 
             _.Property(_ => _.Title).IsRequired().HasMaxLength(100);
 

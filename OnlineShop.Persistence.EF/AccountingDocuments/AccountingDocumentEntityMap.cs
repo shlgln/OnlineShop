@@ -16,13 +16,13 @@ namespace OnlineShop.Persistence.EF.AccountingDocuments
 
             _.Property(_ => _.Number).IsRequired().HasMaxLength(20);
 
-            _.Property(_ => _.SaleInvoiceNumber);
+            _.Property(_ => _.SaleInvoiceNumber).IsRequired();
 
-            _.Property(_ => _.SaleInvoiceId);
+            _.Property(_ => _.SaleInvoiceId).IsRequired();
 
-            _.Property(_ => _.DateRegistration);
+            _.Property(_ => _.DateRegistration).IsRequired();
 
-            _.Property(_ => _.TotalAmount);
+            _.Property(_ => _.TotalAmount).IsRequired();
 
             _.HasOne(_ => _.SaleInvoice).WithMany(_ => _.AccountingDocuments)
                 .HasForeignKey(_ => _.SaleInvoiceId)

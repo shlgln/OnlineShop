@@ -21,7 +21,7 @@ namespace OnlineShop.Persistence.EF.SaleInvoices
             _.Property(_ => _.CustomerName)
             .IsRequired().HasMaxLength(100);
 
-            _.Property(_ => _.DateRegistration);
+            _.Property(_ => _.DateRegistration).IsRequired();
 
             _.HasMany(_ => _.saleInvoiceItems)
             .WithOne(_ => _.SaleInvoice)

@@ -15,9 +15,9 @@ namespace OnlineShop.Persistence.EF.SaleInvoiceItems
             _.Property(_ => _.Id).IsRequired()
             .ValueGeneratedOnAdd();
 
-            _.Property(_ => _.SaleInvoiceId);
+            _.Property(_ => _.SaleInvoiceId).IsRequired();
 
-            _.Property(_ => _.ProductId);
+            _.Property(_ => _.ProductId).IsRequired();
 
             _.Property(_ => _.ProductCount).IsRequired();
 

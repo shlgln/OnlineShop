@@ -15,9 +15,9 @@ namespace OnlineShop.Persistence.EF.StoreRooms
             _.Property(_ => _.Id).IsRequired()
             .ValueGeneratedOnAdd();
 
-            _.Property(_ => _.ProductId);
+            _.Property(_ => _.ProductId).IsRequired();
 
-            _.Property(_ => _.Stock);
+            _.Property(_ => _.Stock).IsRequired();
         }
     }
 }
